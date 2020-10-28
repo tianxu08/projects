@@ -1,1 +1,1 @@
-![search flow](search_overflow.jpg)
+![search flow](assets/search_flow.jpg)
