@@ -109,7 +109,7 @@ getResolver(self) {
 }
 module.exports = new Photo();
 ```
-A node always extends our GraphNode class which has certain methods to implement such as getSchema and getResolver. What is returned by getResolver directly maps to what is defined in the .gql file.
+A node always extends the GraphNode class which has certain methods to implement such as getSchema and getResolver. What is returned by getResolver directly maps to what is defined in the .gql file.
 
 #### The usage
 The framework automatically registers nodes into runtime and a graphql query can be issued against the graphql engine before or during page rendering phase:
@@ -129,23 +129,26 @@ Objects are usually inter-connected in graphQL. That's what we are seeing here b
 ```javascript
 @connect("getUserById", (obj) => {return {id: obj.userId}})
 owner(obj, args, context, info) {}
-The annotation intercepts resolver and returns a promise of User type from getUserById resolver, which is another top level query field. This way fields can be connected at will.
 ```
+The annotation intercepts resolver and returns a promise of User type from getUserById resolver, which is another top level query field. This way fields can be connected at will.
+
 ##### @batch
 
 Consider the following resolver implementation:
 
 Project
-'''javascript
+
+```javascript
 @connect('getPhotosByIds', (obj) => {return [ids: [obj.photoId]}}
 Photo(...)
-'''
+```
+
 When there's a list of 10 projects each with a different photo, then the photo backend will be called 10 times. This is known as N+1 problem.
 
-##### @batch
 To solve the N+1 problem, batching is supported. Different from other approach such as graphql-batch, batching here happens before resolver, instead of inside the resolver. This means batching is nothing but a flood gate to the resolver: it tries to aggregate as much attempted calls to resolver as possible and then flush out with a single call to it:
 
-'''javascript
+
+'''
 @batch("ids")
 getPhotosByIds(obj, args, context, info, service) {
      const { ids } = args;
@@ -192,7 +195,7 @@ All 4 kinds of annotations above can be easily created via a custom atom plugin.
 For service annotation, the plugin will auto suggest the available services defined in the serviceRegistry.
 For connect annotation, the plugin will also auto suggest a list of available connections.
 
-The code-gen
+##### The code-gen
 
 The skeleton code of Photo.js can actually be auto-generated, via a custom Yeoman scaffolding robot. This further reduces the amount of code a developer has to write. In fact, the script generates everything inside Photo folder, including a dummy Mocha test:
 ![codegen](assets/codegen.png)
