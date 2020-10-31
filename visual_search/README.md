@@ -8,8 +8,8 @@ Visual discovery (visual search + recommendation) become more and more important
 ## Applications
 #### [HZ lens](https://www.houzz.com/magazine/find-products-for-your-home-using-visual-search-in-the-houzz-app-stsetivw-vs~124819294)
 
-[visual_search_flow](assets/visual_search_flow.jpg)
-
+![visual_search_flow](assets/visual_search_flow.jpg)
+![visual_search_components](assets/hz_camera.jpg)
 
 #### [HZ visual match](https://www.houzz.com/magazine/inside-houzz-find-products-for-your-home-with-visual-match-stsetivw-vs~73421107)
 
