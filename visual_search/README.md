@@ -10,10 +10,10 @@ Visual discovery (visual search + recommendation) become more and more important
 ##### HZ Lens Flow
 ![visual_search_flow](assets/visual_search_flow.jpg)
 ##### HZ Lens components
-![visual_search_components](assets/hz_camera.jpg)
-There are two components. 
-Left: query understanding layer first computes visual features.
-Right: Mixer layer then retrieves results from different content sources
+![visual_search_components](assets/hz_camera.jpg) <br />
+There are two components. <br />
+Left: query understanding layer first computes visual features.<br />
+Right: Mixer layer then retrieves results from different content sources<br />
 
 #### [HZ visual match](https://www.houzz.com/magazine/inside-houzz-find-products-for-your-home-with-visual-match-stsetivw-vs~73421107)
 
