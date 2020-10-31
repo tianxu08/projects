@@ -40,12 +40,12 @@ Indexing flow is responsible for persisting changes(updates) into the search bac
 
 #### Indexing Pipeline V1
 The V1 pipeline comprises of the following components:
-1. Web/Batch/API: The origin of updates. The updates are either generated organically by users or through batch scripts. The updates are published to Kafka via message-publisher
-2. message-publisher: A Thrift based service that acts as a proxy for Kafka Producer. It receives messages and the topic name from the clients and produces it to the Kafka.
-3. search-update-consumer: The search-update consumer consumes messages from the updates topic, looks up in the DB by calling SearchUpdateDoc API, then sends this indexable document to documents topic via message-publisher. It also sends partial updates and deletes to the documents topic.
+1. **Web/Batch/API**: The origin of updates. The updates are either generated organically by users or through batch scripts. The updates are published to Kafka via message-publisher
+2. **message-publisher**: A Thrift based service that acts as a proxy for Kafka Producer. It receives messages and the topic name from the clients and produces it to the Kafka.
+3. **search-update-consumer**: The search-update consumer consumes messages from the updates topic, looks up in the DB by calling SearchUpdateDoc API, then sends this indexable document to documents topic via message-publisher. It also sends partial updates and deletes to the documents topic.
 
-4. search-document-consumer: The search-document consumer consumes messages from documents topic and calls searchindexer.
-5. searchindexer: The Searchindexer is a Thrift based service that updates the Solr backends. The SolrLB module is responsible for discovering leader endpoints for Solr clusters. The searchindexer also provides routing information for routing the documents to the appropriate shards.
+4. **search-document-consumer**: The search-document consumer consumes messages from documents topic and calls searchindexer.
+5. **searchindexer**: The Searchindexer is a Thrift based service that updates the Solr backends. The SolrLB module is responsible for discovering leader endpoints for Solr clusters. The searchindexer also provides routing information for routing the documents to the appropriate shards.
 
 ![index pipeline v1](assets/search_index_flow_v1.jpg)
 
@@ -53,10 +53,10 @@ The V1 pipeline comprises of the following components:
 #### Indexing Pipeline V2
 The indexing flow V2 was introduced in order to support offline index builds. The scope of this flow is limited to photos and products.
 ##### Kafka consumers
-1. search-kvstore-updater
+1. **search-kvstore-updater**
 The search updates from WEB/API and the search batch updates from batch scripts are consumed by a new consumer called search-kvstore-updater. This consumer processes these updates and sends it to KV-Store. The current version of KV-Store is a Solr index which has all the fields of the production index as only “stored”. In future the KV-Store can be of any type. The consumer only publishes “online” updates to an output Kafka topic.
 
-2. search-online-update-consumer
+2. **search-online-update-consumer**
 This consumer consumes the output messages from search-kvstore-updater. The full updates are performed by looking up in the KV-Store. It sends the updates to SearchIndexer, which in turn updates Solr clusters.
 
 ##### Search Offline Indexing
