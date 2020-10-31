@@ -1,5 +1,5 @@
 
-This is an introduction of GraphQL in HZ
+# GraphQL in HZ
 
 ### Introduction
 GraphQL(http://graphql.org) is a data aggregation framework open sourced by facebook in 2015.
@@ -28,7 +28,18 @@ The following shows the architecture diagram. Steps breakdown:
 ![overview](assets/overview.png)
 
 ### Ecosystem
+
+The ecosystem contains 
+1. Node.js with GraphQL schema and resolver, which are organized in the graph.
+2. Utility Framework, leveraging JS decorators pattern and inspired by other frameworks such as SpringBoot.
+3. Atom plugin, which makes it ieasier to create GraphQL nodes and connections
+4. Monitoring system based on TSDB and Bosun. 
+5. Development tools for higher productivity.
+
 ![ecosystem](assets/eco-system.png)
 
 
 
+### Highlight
+GrapHZ is the first framework in industry with ease of use and as a thin and lightweight layer. 
+It is well tested in large scale of traffic and adopted by some other companies. 
