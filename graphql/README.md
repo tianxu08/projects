@@ -147,14 +147,13 @@ When there's a list of 10 projects each with a different photo, then the photo b
 
 To solve the N+1 problem, batching is supported. Different from other approach such as graphql-batch, batching here happens before resolver, instead of inside the resolver. This means batching is nothing but a flood gate to the resolver: it tries to aggregate as much attempted calls to resolver as possible and then flush out with a single call to it:
 
-
-'''
+```javascript
 @batch("ids")
 getPhotosByIds(obj, args, context, info, service) {
-     const { ids } = args;
-     ...                   
+     const { ids } = args; 
 }
-'''
+```
+
 The annotation declares that the batching is based on the ids field. This ids field should have already been defined as a plural param in schema. When the getPhotosByIds is called via @connect, the call is intercepted by the batch annotation and a promise immediately returned. It's guaranteed that there will only be a single execution of resolver code within a JS tick.
 
 ##### @service
