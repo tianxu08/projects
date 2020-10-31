@@ -1,5 +1,5 @@
 
-Visual Discovery Engine in HZ
+# Visual Discovery Engine in HZ
 
 ## Introduction
 Visual discovery (visual search + recommendation) become more and more important driven by explosive growth of online photos and videos. It gets benefits from the advances in Computer Vision and the findings that a large proportation of users prefer using discovery systems to browse(getting inspiring ideas) rather than to search(finding answers). In HZ, the discovery engine powered the visual match and visual search (a.k.a HZ Lens).
@@ -15,7 +15,7 @@ There are two components. <br />
 Left: query understanding layer first computes visual features.<br />
 Right: Mixer layer then retrieves results from different content sources<br />
 
-#### [HZ visual match](https://www.houzz.com/magazine/inside-houzz-find-products-for-your-home-with-visual-match-stsetivw-vs~73421107)
+#### [HZ Visual Match](https://www.houzz.com/magazine/inside-houzz-find-products-for-your-home-with-visual-match-stsetivw-vs~73421107)
 
 
 ## Experiments and Lessons
@@ -34,12 +34,18 @@ So, taking the memory usage on production and the test performance into consider
 
 #### Object Detection
 We tested Faster R-CNN and Single Shot Detection(SSD)
-Faster-R-CNN:
+###### Faster-R-CNN:
 We trained the Faster R-CNN with VGG16 and ResNet101 as the bone network. And also when training the Faster R-CNN models, we took of a few differences compared with the original paper. 
 1. Direct end-to-end optimization was used in the experiment, which was different with the alternating optimzation in the orignal paper. 
 2. For the ResNet101 backbone of Faster R-CNN, during the experiment, if the number of proposals was decreased from 300 to 100, we could gain significant computation savings without impact precision and recall. 
 
-SSD
+The Faster-R-CNN is firstly adopted in the **Visual Match** system. It's higher accuracy is welcome. However, In Visual Match System, the Faster-R-CNN is relying on agressive caching, coupled with dark reads during models swaps for cache warning. 
+So, in our **Object Search System** (part of the HZ Lens), we took advantage of the SSD because speed is the top concern with acceptable accurancy. 
+
+###### SSD
 We trained the SSD with a very close architucture of the original paper proposed. There were a few key differences. 
 1. We changed the IoU threshold to 0.7 from 0.5 to ensure the resulting detections tightly bound the objects. 
 2. With the 0.7 IoU threshold, our model used 1 stride for all additional convolutions layers, since we found that the original strides of 2 led pool localization performance when the IoU was set to 0.7.
+
+#### Covnet feature for recommendation
+
