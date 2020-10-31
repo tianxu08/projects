@@ -77,6 +77,6 @@ The diagram below illustrates the entire flow. The offline indexing flow is orch
 ### Highlights
 1. We reached the goals of search backend system with maintainability, abstraction, parallelization and better logging.
 2. The vertical search development is much faster and more efficient powered by searchmixer. 
-3. The indexing pipeline is more reliable and the v2 index pipeline powered the ranking system, making the machine learning iteration faster and providing more data to train. 
+3. The indexing pipeline is more stable and the v2 index pipeline powered the ranking system, making the machine learning iteration faster and providing more data to train. 
 
 
