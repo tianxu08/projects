@@ -35,7 +35,7 @@ So, taking the memory usage on production and the test performance into consider
 #### Object Detection
 We tested Faster R-CNN and Single Shot Detection(SSD)
 ##### Faster-R-CNN:
-We trained the Faster R-CNN with VGG16 and ResNet101 as the bone network. And also when training the Faster R-CNN models, we took of a few differences compared with the original paper. 
+We trained the Faster R-CNN with VGG16 and ResNet101 as the bone network. And also when training the Faster R-CNN models, we took of a few differences compared with the [original paper](https://arxiv.org/pdf/1506.01497.pdf). 
 1. Direct end-to-end optimization was used in the experiment, which was different with the alternating optimzation in the orignal paper. 
 2. For the ResNet101 backbone of Faster R-CNN, during the experiment, if the number of proposals was decreased from 300 to 100, we could gain significant computation savings without impact precision and recall. 
 
@@ -43,7 +43,7 @@ The Faster-R-CNN is firstly adopted in the **Visual Match** system. It's higher 
 So, in our **Object Search System** (part of the HZ Lens), we took advantage of the SSD because speed is the top concern with acceptable accurancy. 
 
 ##### SSD
-We trained the SSD with a very close architucture of the original paper proposed. There were a few key differences. 
+We trained the SSD with a very close architucture of the [original paper](https://arxiv.org/pdf/1512.02325.pdf) proposed. There were a few key differences. 
 1. We changed the IoU threshold to 0.7 from 0.5 to ensure the resulting detections tightly bound the objects. 
 2. With the 0.7 IoU threshold, our model used 1 stride for all additional convolutions layers, since we found that the original strides of 2 led pool localization performance when the IoU was set to 0.7.
 
