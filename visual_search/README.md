@@ -1,16 +1,18 @@
 
-In HZ, visual search contains visual search and recommendations. The goal of HZ is to help users ... and find the proper furnitures. 
-Benefitting from the confluence of two recent developments, 
+Visual Discovery Engine in HZ
+
+## Introduction
+Visual discovery (visual search + recommendation) become more and more important driven by explosive growth of online photos and videos. It gets benefits from the advances in Computer Vision and the findings that a large proportation of users prefer using discovery systems to browse(getting inspiring ideas) rather than to search(finding answers). In HZ, the discovery engine powered the visual match and visual search (a.k.a HZ Lens).
 
 
-The visual search is the core engine of our features, visual match and HZ lens. Here I'll introduce the general architecture overview of our visual search system and shares the lessens we learned, including integrating visual features and products in HZ. 
+## Applications
+[HZ lens](https://www.houzz.com/magazine/find-products-for-your-home-using-visual-search-in-the-houzz-app-stsetivw-vs~124819294)
 
-Product introduction
-HZ visual match (https://www.houzz.com/magazine/inside-houzz-find-products-for-your-home-with-visual-match-stsetivw-vs~73421107)
-HZ lens (https://www.houzz.com/magazine/find-products-for-your-home-using-visual-search-in-the-houzz-app-stsetivw-vs~124819294)
+[HZ visual match](https://www.houzz.com/magazine/inside-houzz-find-products-for-your-home-with-visual-match-stsetivw-vs~73421107)
 
 
-Feature representation
+## Experiments and Lessons
+#### Feature representation
 We adopt and evlauted several popular classification models(in the beginning of 2018) such as GoogLeNet[], VGG16[] and variants ResNet101 and ResNet152[]. Besides raw features, we also tried binarized[] reprentations of these features. Binarized reprentating features benefit us because of their smaller memory usage, which is important on production enviroment. In addition, we also compared the Euclidean(L2) and Manhattan(L1) distance metric for the raw features. 
 
 We trained the base models on ImageNet classification[] and HZ dataset. HZ pictures are generally with higher qualities and have different statistics. For HZ dataset, the models are fine-tuned by replacing the softmax classification layer of a pre-trained base model with a new classification layer, trained to classify HZ images, initialized using the same intermediate and lower level weights. 
@@ -23,7 +25,7 @@ There are some interesting findings.
 3. With binarized features, VGG16-fc16 performances the best among the test. The binarized fc16 features are 16x smaller than the raw ResNet-pool5 features. 
 So, taking the memory usage on production and the test performance into consideration, we choose the VGG16-fc6 as the feature retrieval model. 
 
-Object Detection
+#### Object Detection
 We tested Faster R-CNN and Single Shot Detection(SSD)
 Faster-R-CNN:
 We trained the Faster R-CNN with VGG16 and ResNet101 as the bone network. And also when training the Faster R-CNN models, we took of a few differences compared with the original paper. 
