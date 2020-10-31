@@ -47,11 +47,11 @@ The ecosystem contains
 3. GrapHZ is one of the most important engineering achievement in HZ in 2017.
 
 ### Details
-The basics
+##### The basics
 A node is a core concept in our framework.
 
 Nodes comprise of a schema and resolver and are organized like nodes in the graph. A node is more like a domain name such as "Photo", so that anything that has to do with a "Photo" should go inside this node:
-
+```
 graph
 |-- serviceRegistry.json
 |-- User
@@ -61,8 +61,9 @@ graph
       |-- Photo.gql
       |-- Test
             |-- PhotoTest.js
+```
 Example of Photo.gql
-
+```
 type Photo {
        id: Int
        owner: User
@@ -71,10 +72,11 @@ type Photo {
 extend type Query {
        getPhotosByIds(ids: [Int]): [Photo]
 }
+```
 Photo.gql and Photo.js come together. The .js is the corresponding resolver implementation:
 
 Example of Photo.js
-
+```
 import schema from '/Photo.gql';
 class Photo extends GraphNode {
 
@@ -106,7 +108,7 @@ getResolver(self) {
 }
 }
 module.exports = new Photo();
-
+```
 A node always extends our GraphNode class which has certain methods to implement such as getSchema and getResolver. What is returned by getResolver directly maps to what is defined in the .gql file.
 
 The usage
