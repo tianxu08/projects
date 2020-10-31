@@ -114,7 +114,7 @@ A node always extends the GraphNode class which has certain methods to implement
 #### The usage
 The framework automatically registers nodes into runtime and a graphql query can be issued against the graphql engine before or during page rendering phase:
 ```javascript
-var graphQLPromise = Graphouzz.getClient().query(cityProfileGql, variables)
+var graphQLPromise = Graphz.getClient().query(cityProfileGql, variables)
 .then(result => {
      ...
 })
