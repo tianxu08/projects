@@ -1,0 +1,5 @@
+# Pinterest Analysis
+
+Pinterest is a pinboard-style photo-sharing website that allows users to create and manage theme-based image collections such as events, interests and hobbies. Retail companies have taken advantage of Pinterest for advertising and style trending. The web design pro- vides an ideal layout for "style conscious retailers", where products can easily be visual- ized within a consumer context. In our Pinterest analysis, we performed a primitive anal- ysis of Pinterest social network. We collected an initial dataset of Pinterest users through their other ONS account such as Facebook and Twitter, which shows several basic net- work features and large-scale behaviors of users. In addition, we dynamically explored the propagation of information (repin) in Pinterest, studying how the posts move through the social network and learning modeling information diffusion from online social net- work users.
+
+Plese see the details in [Presentation](./eecs495_Final_Presentation.pdf) and [Report](./eecs495_Final_Report.pdf)
